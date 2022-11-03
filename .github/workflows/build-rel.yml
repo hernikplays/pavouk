@@ -1,0 +1,35 @@
+name: Sestavit pro vydání
+
+on:  
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: subosito/flutter-action@v2.8.0
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build
+        run: flutter build web --release
+      - name: Zabalit do archivu
+        uses: vimtor/action-zip@v1
+        with:
+          files: build/web
+          recursive: false
+      - name: Nahrát
+        uses: svenstaro/upload-release-action@2.3.0
+        with:
+          file: ${{ github.workspace }}/result.zip
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
