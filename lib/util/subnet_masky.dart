@@ -1,5 +1,3 @@
-import 'dart:math';
-
 class Util {
   static List<Map<String, int>> subnety() {
     var list = <Map<String, int>>[
@@ -17,12 +15,10 @@ class Util {
   static List<String> _strToBin(String input) {
     var list = <String>[];
     input.split(".").forEach((numero) {
-      print(numero);
       var bin = int.parse(numero).toRadixString(2);
       while (bin.length < 8) {
         bin = "0$bin";
       }
-      print(bin);
       list.add(bin);
     });
     return list;
@@ -52,9 +48,7 @@ class Util {
 
   static String ipToNetworkAdd(String ip, String nm) {
     var nmBin = _strToBin(nm);
-    print(nmBin);
     var ipBin = _strToBin(ip);
-    print(ipBin);
 
     var networkAdd = <String>[];
     for (int i = 0; i < 4; i++) {

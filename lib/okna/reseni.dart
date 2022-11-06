@@ -4,6 +4,23 @@ import 'package:pavouk/util/subnet_masky.dart';
 import 'package:pavouk/util/vzhled.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+/*
+    Copyright (C) 2022 Matyáš Caras
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 class Reseni extends StatefulWidget {
   const Reseni({super.key, required this.origoIp, required this.subnety});
   final String origoIp;
@@ -123,19 +140,20 @@ class _ReseniState extends State<Reseni> {
                 children: [
                   Text(
                     "Zadaná IP:",
-                    style: Vzhled.tableContent,
+                    style: Vzhled.tableContent(context),
                   ),
                   const SizedBox(
                     width: 20,
                   ),
-                  Text(origoNetIP, style: Vzhled.tableContent)
+                  Text(origoNetIP, style: Vzhled.tableContent(context))
                 ],
               ),
               DefaultTextStyle(
-                style: Vzhled.tableContent,
+                style: Vzhled.tableContent(context),
                 child: Expanded(
                   child: Table(
-                    border: TableBorder.all(),
+                    border: TableBorder.all(
+                        color: Theme.of(context).colorScheme.inverseSurface),
                     defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                     defaultColumnWidth: FixedColumnWidth(
                         Device.orientation == Orientation.landscape
@@ -247,28 +265,60 @@ class _ReseniState extends State<Reseni> {
               style: Vzhled.text, textAlign: TextAlign.center),
         ),
         TableCell(
+            child: SizedBox(
+          height: 50,
+          child: Center(
             child: Text(
-          widget.subnety[i].toString(),
-          textAlign: TextAlign.center,
+              widget.subnety[i].toString(),
+              textAlign: TextAlign.center,
+            ),
+          ),
         )),
         TableCell(
+            child: SizedBox(
+          height: 50,
+          child: Center(
             child: Text((prefix["hosti"]! - 2).toString(),
-                textAlign: TextAlign.center)),
+                textAlign: TextAlign.center),
+          ),
+        )),
         TableCell(
-          child: Text(ip, textAlign: TextAlign.center),
+          child: SizedBox(
+              height: 50,
+              child: Center(child: Text(ip, textAlign: TextAlign.center))),
         ),
         TableCell(
-          child:
-              Text(prefix["prefix"]!.toString(), textAlign: TextAlign.center),
+          child: SizedBox(
+            height: 50,
+            child: Center(
+              child: Text(prefix["prefix"]!.toString(),
+                  textAlign: TextAlign.center),
+            ),
+          ),
         ),
         TableCell(
-          child: Text(prvni, textAlign: TextAlign.center),
+          child: SizedBox(
+            height: 50,
+            child: Center(
+              child: Text(prvni, textAlign: TextAlign.center),
+            ),
+          ),
         ),
         TableCell(
-          child: Text(posledni, textAlign: TextAlign.center),
+          child: SizedBox(
+            height: 50,
+            child: Center(
+              child: Text(posledni, textAlign: TextAlign.center),
+            ),
+          ),
         ),
         TableCell(
-          child: Text(broadcast, textAlign: TextAlign.center),
+          child: SizedBox(
+            height: 50,
+            child: Center(
+              child: Text(broadcast, textAlign: TextAlign.center),
+            ),
+          ),
         ),
       ]));
     }

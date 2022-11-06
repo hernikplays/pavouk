@@ -8,6 +8,23 @@ import 'package:pavouk/util/subnet_masky.dart';
 import 'package:pavouk/util/vzhled.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+/*
+    Copyright (C) 2022 Matyáš Caras
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 class DomovskaStrana extends StatefulWidget {
   const DomovskaStrana({super.key});
 
@@ -254,6 +271,38 @@ class _DomovskaStranaState extends State<DomovskaStrana> {
               );
               return;
             }
+            var prefix = int.tryParse(_origoController.text.split("/")[1]);
+            var sub = Util.subnety()
+                .where((element) => element["prefix"]! == (prefix ?? 90))
+                .toList();
+            if (sub.isEmpty) {
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    "Nezadali jste platný subnet prefix.",
+                    style: TextStyle(fontSize: 12.sp),
+                  ),
+                ),
+              );
+              return;
+            }
+            var pocet = 0;
+            for (var subPocet in subnety) {
+              pocet += subPocet;
+            }
+            if (sub[0]["hosti"]! < pocet) {
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    "Prefix nemá tolik hostů.",
+                    style: TextStyle(fontSize: 12.sp),
+                  ),
+                ),
+              );
+              return;
+            }
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -281,6 +330,11 @@ class _DomovskaStranaState extends State<DomovskaStrana> {
         ),
       );
     }
+    var subnety = Util.subnety()
+        .where(
+          (element) => element["hosti"]! > maxPocetRealnych,
+        )
+        .toList();
     Random rnd = Random();
     // vytvořit zdrojovou IP
     var ip = "";
@@ -301,8 +355,9 @@ class _DomovskaStranaState extends State<DomovskaStrana> {
       }
       subnetData.add(rnd.nextInt(maxPocetRealnych) + 2);
     }
+    var maska = subnety[rnd.nextInt(subnety.length)];
     // vložit
-    _origoController.text = "$ip/22";
+    _origoController.text = "$ip/${maska['prefix']}";
     generovatSubnetFieldy(pocetSubnetu, hodnoty: subnetData);
   }
 }

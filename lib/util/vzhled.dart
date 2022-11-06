@@ -14,5 +14,6 @@ class Vzhled {
   static final ButtonStyle tlacitkoStyl =
       ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red));
   static final TextStyle text = TextStyle(fontSize: 13.sp);
-  static final TextStyle tableContent = TextStyle(fontSize: 11.sp);
+  static TextStyle tableContent(context) => TextStyle(
+      fontSize: 11.sp, color: Theme.of(context).colorScheme.inverseSurface);
 }
