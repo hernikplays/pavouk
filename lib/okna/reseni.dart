@@ -139,7 +139,7 @@ class _ReseniState extends State<Reseni> {
               Row(
                 children: [
                   Text(
-                    "Zadaná IP:",
+                    "Zadaná IP (sítě):",
                     style: Vzhled.tableContent(context),
                   ),
                   const SizedBox(

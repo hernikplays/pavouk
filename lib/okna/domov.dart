@@ -151,6 +151,9 @@ class _DomovskaStranaState extends State<DomovskaStrana> {
                           ],
                         ),
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       TextButton(
                           onPressed: () => generuj(),
                           style: Vzhled.tlacitkoStyl,
