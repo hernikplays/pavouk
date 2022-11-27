@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -18,41 +19,126 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="theme-color" content="#ff4c4c">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Pavouk | subnetování">
+  <meta name="description"
+    content="S pavoukem si můžete nechat vygenerovat náhodnou síť s náhodným počtem subnetů/podsítí, každý s náhodným počtem hostů, případně nechat vyřešit vlastní příklad.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pavouk.caras.cafe/">
+  <meta property="og:title" content="Pavouk | subnetování">
+  <meta property="og:description"
+    content="S pavoukem si můžete nechat vygenerovat náhodnou síť s náhodným počtem subnetů/podsítí, každý s náhodným počtem hostů, případně nechat vyřešit vlastní příklad.">
+  <meta property="og:image" content="https://pavouk.caras.cafe/banner.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://pavouk.caras.cafe/">
+  <meta property="twitter:title" content="Pavouk | subnetování">
+  <meta property="twitter:description"
+    content="S pavoukem si můžete nechat vygenerovat náhodnou síť s náhodným počtem subnetů/podsítí, každý s náhodným počtem hostů, případně nechat vyřešit vlastní příklad.">
+  <meta property="twitter:image" content="https://pavouk.caras.cafe/banner.png">
+
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="pavouk">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="apple-touch-icon" href="icon.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="icon.png" />
 
-  <title>pavouk</title>
+  <title>Pavouk | subnetování</title>
   <link rel="manifest" href="manifest.json">
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = '2832904149';
+    var serviceWorkerVersion = '961401150';
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+
+  <style>
+    .lds-ring {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+
+    .lds-ring div {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      margin: 8px;
+      border: 8px solid #fff;
+      border-radius: 50%;
+      animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      border-color: #000 transparent transparent transparent;
+    }
+
+    .lds-ring div:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+
+    .lds-ring div:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+
+    .lds-ring div:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+
+    @keyframes lds-ring {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%)
+    }
+  </style>
 </head>
+
 <body>
+  <div class="center">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
   <script>
-    window.addEventListener('load', function(ev) {
+    window.addEventListener('load', function (ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         }
-      }).then(function(engineInitializer) {
+      }).then(function (engineInitializer) {
         return engineInitializer.initializeEngine();
-      }).then(function(appRunner) {
+      }).then(function (appRunner) {
         return appRunner.runApp();
       });
     });
   </script>
 </body>
+
 </html>
